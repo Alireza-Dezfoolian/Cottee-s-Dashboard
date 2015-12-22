@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body ng-app="app">
+    <header class="row grey">
+        <div class="col-sm-2 text-center">
+            <img class="img-responsive display-inline u-margin-top-20" src="img/logo.jpg" alt="">
+        </div>
+        <div class="col-sm-6">
+            <h1 class="u-margin-top-20">Cottee's Dashboard</h1>
+            <div class="line u-margin-top-20"></div>
+            <p class="u-margin-top-20"ng-cloak><span class="glyphicon glyphicon-repeat"></span><span> Last updated: 25 June 2015</span> <span class="u-margin-left-20 glyphicon glyphicon-list-alt"></span> <span class="">Viewing data for: January - June</span> </p>
+        </div>
+        <img class="col-sm-3 u-margin-top-20 u-margin-right-40 pull-right" src="img/products.jpg" alt="">
+    </header>
+    <main ng-controller="pureprofileCtrl">
+        <div class="col-sm-2 hidden-xs dark-grey"></div>
+        <div class="col-sm-10 right-side">
+            <section class="sections" id="section-1">
+                <div class="section-header">
+                    <span>Cottee's</span>
+                    <div class="line short"></div>
+                    <button ng-click="deleteFilter()" class="btn btn-danger pull-right u-margin-left-20"><span class="glyphicon glyphicon-cog"></span> ALL FILTERS </button>
+                    <p class="font-size-12">Sample Description about this brand here</p>
+                    <span ng-repeat="(key, value) in sampleDescrption" class="col-sm-2 font-size-12"><p>{{key}}</p><strong ng-class="{ redbold : $index==4 }">{{value}}</strong></span>
+                </div>
+            </section>
+            <section class="sections" id="section-2" ng-show="chartFilter">
+                <div class="section-header">
+                    <span>Key Effective Ad measures</span>
+                    <div class="line short"></div>
+                    <button ng-click="changeFilter()" class="btn btn-danger pull-right u-margin-left-20"><span class="glyphicon glyphicon-cog"></span> CHART FILTERS</button>
+                    <button ng-click="export()" class="btn btn-danger pull-right">EXPORT</button>
+                </div>
+                <div class="pie-container col-sm-offset-2 col-sm-3" ng-repeat="num in numbers">
+                    <span class="label-text"></span>
+                    <div class="pie-wrapper">
+                        <div data-value="{{Math.floor(num.number*10)}}" class="arc"></div>
+                        <span ng-cloak class="ng-cloak score">{{num.number}}</span>
+                    </div>
+                    <div class="txt-container">
+                        <div>
+                            <span class="left">0</span>
+                            <span class="right">10</span>
+                        </div>
+                    </div>
+                    <div class="txt-container u-margin-top-20 text-center">
+                        <strong>{{num.title}}</strong>
+                        <p>{{num.text}}</p>
+                    </div>
+                </div>
+            </section>
+            <section class="sections" id="section-3" ng-show="chartFilter">
+                <div class="section-header">
+                    <span>Add + Impact Ranking</span>
+                    <div class="line short"></div>
+                    <button ng-click="changeFilter()" class="btn btn-danger pull-right u-margin-left-20"><span class="glyphicon glyphicon-cog"></span> CHART FILTERS</button>
+                    <button ng-click="export()" class="btn btn-danger pull-right">EXPORT</button>
+                </div>
+                <div class="chart-wrapper">
+                    <div ng-repeat="h in horiz">
+                        <div ng-class="{ red : $index==1 }" ng-style='{"margin-top" : horiz[$index][3], "width" : horiz[$index][2]}' class="bars"></div>
+                    </div>
+                    <div ng-repeat="bar in bars" class="bar">
+                        <div>{{bar}}</div>
+                    </div>
+                </div>
+            </section>
+    </main>
+</body>
+<script src="node_modules/angular/angular.js"></script>
+<script src="js/app.js"></script>
+
+</html>
